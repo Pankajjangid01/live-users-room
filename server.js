@@ -3,16 +3,21 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const connectDB = require("./config");
 const User = require("./model");
-require("dotenv").config();
 const cors = require("cors");
 const http = require("http");
 const socketIO = require("socket.io");
+require("dotenv").config();
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
 connectDB();
+app.use(
+  cors({
+    origin: "https://live-users-room.onrender.com",
+  })
+);
 
 app.use(cors());
 app.use(bodyParser.json());
